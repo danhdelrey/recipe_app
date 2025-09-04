@@ -8,13 +8,16 @@ class AppTheme {
     primaryColor: PrimaryColors.shade600,
     scaffoldBackgroundColor: NeutralColors.shade50,
 
-    colorScheme: ColorScheme.fromSeed(seedColor: PrimaryColors.shade600, primary: PrimaryColors.shade600, secondary: SecondaryColors.shade600, surface: NeutralColors.shade50),
+    colorScheme: ColorScheme.fromSeed(
+      seedColor: PrimaryColors.shade600,
+      primary: PrimaryColors.shade600,
+      secondary: SecondaryColors.shade600,
+      surface: NeutralColors.shade50,
+    ),
 
     appBarTheme: const AppBarTheme(
       backgroundColor: NeutralColors.shade50,
       elevation: 0,
-      iconTheme: IconThemeData(color: NeutralColors.shade900),
-      titleTextStyle: TextStyle(color: NeutralColors.shade900, fontSize: 18, fontWeight: FontWeight.w600),
     ),
 
     textTheme: GoogleFonts.interTextTheme(ThemeData.light().textTheme),
@@ -28,6 +31,11 @@ class AppTheme {
     ),
 
     useMaterial3: true,
-    pageTransitionsTheme: const PageTransitionsTheme(builders: {TargetPlatform.android: CupertinoPageTransitionsBuilder(), TargetPlatform.iOS: CupertinoPageTransitionsBuilder()}),
+    pageTransitionsTheme: const PageTransitionsTheme(
+      builders: {
+        TargetPlatform.android: CupertinoPageTransitionsBuilder(),
+        TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
+      },
+    ),
   );
 }
