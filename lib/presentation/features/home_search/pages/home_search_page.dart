@@ -25,7 +25,37 @@ class HomeSearchPage extends StatelessWidget {
           ),
         ),
       ),
-      body: const Center(child: Text('This is the Home Search Page')),
+      body: Column(
+        children: [
+          SizedBox(height: 15),
+          _buildSearchSuggestionItem('Pizza hến xào', context),
+          _buildSearchSuggestionItem('Pipi đút lò', context),
+          _buildSearchSuggestionItem('Pizza thơm ', context),
+          _buildSearchSuggestionItem('Pizza hải sản', context),
+          _buildSearchSuggestionItem('Pizza thịt xông khói', context),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildSearchSuggestionItem(String suggestion, BuildContext context) {
+    return InkWell(
+      onTap: () {
+        // Handle suggestion tap
+      },
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 16),
+        child: Row(
+          children: [
+            Text(suggestion, style: Theme.of(context).textTheme.bodyLarge),
+            Spacer(),
+            Icon(
+              Icons.chevron_right,
+              color: Theme.of(context).colorScheme.primary,
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
