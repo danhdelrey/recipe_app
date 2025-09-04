@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'app_colors.dart';
 
 class AppTheme {
@@ -16,7 +17,7 @@ class AppTheme {
       titleTextStyle: TextStyle(color: NeutralColors.shade900, fontSize: 18, fontWeight: FontWeight.w600),
     ),
 
-    textTheme: const TextTheme(bodyMedium: TextStyle(color: NeutralColors.shade800)),
+    textTheme: GoogleFonts.interTextTheme(ThemeData.light().textTheme),
 
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
@@ -27,5 +28,6 @@ class AppTheme {
     ),
 
     useMaterial3: true,
+    pageTransitionsTheme: const PageTransitionsTheme(builders: {TargetPlatform.android: CupertinoPageTransitionsBuilder(), TargetPlatform.iOS: CupertinoPageTransitionsBuilder()}),
   );
 }
