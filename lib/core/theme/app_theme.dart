@@ -11,7 +11,7 @@ class AppTheme {
     colorScheme: ColorScheme.fromSeed(
       seedColor: PrimaryColors.shade600,
       primary: PrimaryColors.shade600,
-      secondary: SecondaryColors.shade600,
+      secondary: SecondaryColors.shade900,
       surface: NeutralColors.shade50,
     ),
 
