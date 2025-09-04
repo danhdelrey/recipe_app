@@ -27,6 +27,8 @@ class HomePage extends StatelessWidget {
             SliverToBoxAdapter(child: _buildLocalSection(context)),
             SliverToBoxAdapter(child: SizedBox(height: 16)),
             SliverToBoxAdapter(child: _buildCategorySection(context)),
+            SliverToBoxAdapter(child: SizedBox(height: 16)),
+            SliverToBoxAdapter(child: _buildRecentRecipeSection(context)),
             SliverList(
               delegate: SliverChildBuilderDelegate(
                 (context, index) => ListTile(title: Text('Item #$index')),
@@ -133,6 +135,38 @@ class HomePage extends StatelessWidget {
     );
   }
 
+  Column _buildRecentRecipeSection(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 6.0, horizontal: 16.0),
+          child: Text(
+            'Công thức gần đây',
+            style: Theme.of(
+              context,
+            ).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
+          ),
+        ),
+        SizedBox(height: 12),
+        SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Row(
+              children: List.generate(10, (index) {
+                return Padding(
+                  padding: const EdgeInsets.only(right: 16),
+                  child: _buildRecentRecipeCard(context),
+                );
+              }),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
   SizedBox _buildCategoryRecipeCard(BuildContext context) {
     return SizedBox(
       width: 150,
@@ -196,7 +230,7 @@ class HomePage extends StatelessWidget {
             right: 0,
             child: CircleAvatar(
               radius: 40,
-              backgroundImage: AssetImage("assets/images/egg.jpg"),
+              backgroundImage: AssetImage('assets/images/egg.jpg'),
             ),
           ),
         ],
@@ -325,6 +359,65 @@ class HomePage extends StatelessWidget {
                       color: Theme.of(context).colorScheme.primary,
                       fontWeight: FontWeight.bold,
                     ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildRecentRecipeCard(BuildContext context) {
+    return InkWell(
+      onTap: () {},
+      borderRadius: BorderRadius.circular(8.0),
+      child: Ink(
+        width: 150,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(16.0),
+              child: Image.asset(
+                'assets/images/recent_recipe.png',
+                fit: BoxFit.cover,
+              ),
+            ),
+
+            Padding(
+              padding: const EdgeInsets.all(6.0),
+              child: Text(
+                'Trứng chiên',
+                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                  fontWeight: FontWeight.bold,
+                  color: PrimaryColors.shade900,
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(
+                left: 6.0,
+                right: 6.0,
+                bottom: 6.0,
+              ),
+              child: Row(
+                children: [
+                  CircleAvatar(
+                    radius: 9,
+                    backgroundImage: AssetImage('assets/images/avatar.png'),
+                    backgroundColor: NeutralColors.shade50,
+                  ),
+                  const SizedBox(width: 6),
+                  Text(
+                    'Đinh Trọng Phúc',
+                    style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                      color: SecondaryColors.shade950,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ],
               ),

@@ -14,14 +14,8 @@ class _CategorySelectorState extends State<CategorySelector> {
   final List<String> categories = [
     "Danh mục 1",
     "Danh mục 2",
+    "Danh mục",
     "Danh mục 3",
-    "Danh mục 4",
-    "Danh mục 5",
-    "Danh mục 6",
-    "Danh mục 7",
-    "Danh mục 8",
-    "Danh mục 9",
-    "Danh mục 10",
   ];
 
   @override
