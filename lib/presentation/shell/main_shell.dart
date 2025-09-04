@@ -8,7 +8,10 @@ class MainShell extends StatelessWidget {
   const MainShell({required this.navigationShell, super.key});
 
   void _onTap(int index) {
-    navigationShell.goBranch(index, initialLocation: index == navigationShell.currentIndex);
+    navigationShell.goBranch(
+      index,
+      initialLocation: index == navigationShell.currentIndex,
+    );
   }
 
   @override
@@ -17,13 +20,29 @@ class MainShell extends StatelessWidget {
       body: navigationShell,
 
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          
-        },
-        backgroundColor: PrimaryColors.shade400,
-        shape: const CircleBorder(),
-        child: const Icon(Icons.add, color: NeutralColors.shade900, size: 32),
+      floatingActionButton: Container(
+        height: 56,
+        width: 56,
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          gradient: LinearGradient(
+            colors: [PrimaryColors.shade600, PrimaryColors.shade500],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          ),
+        ),
+        child: FloatingActionButton(
+          onPressed: () {},
+          backgroundColor: Colors.transparent,
+          splashColor: Colors.transparent,
+          highlightElevation: 0,
+          focusColor: Colors.transparent,
+          hoverColor: Colors.transparent,
+          foregroundColor: Colors.transparent,
+          elevation: 0,
+          shape: const CircleBorder(),
+          child: const Icon(Icons.add_rounded, color: Colors.white, size: 50),
+        ),
       ),
 
       // BottomAppBar
@@ -32,24 +51,33 @@ class MainShell extends StatelessWidget {
         notchMargin: 8.0,
         color: Colors.white,
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            _buildNavItem(Icons.home_outlined, 'Home', 0),
-            _buildNavItem(Icons.search, 'Search', 1),
+            _buildNavItem(Icons.home_outlined, Icons.home, 'Home', 0),
+            _buildNavItem(Icons.search, Icons.search, 'Search', 1),
             const SizedBox(width: 40),
-            _buildNavItem(Icons.bookmark_border, 'Saved', 2),
-            _buildNavItem(Icons.person_outline, 'Profile', 3),
+            _buildNavItem(Icons.bookmark_border, Icons.bookmark, 'Saved', 2),
+            _buildNavItem(Icons.person_outline, Icons.person, 'Profile', 3),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildNavItem(IconData icon, String label, int index) {
+  Widget _buildNavItem(
+    IconData icon,
+    IconData selectedIcon,
+    String label,
+    int index,
+  ) {
     final isSelected = navigationShell.currentIndex == index;
-    return IconButton(
-      icon: Icon(icon, color: isSelected ? PrimaryColors.shade600 : NeutralColors.shade400),
-      onPressed: () => _onTap(index),
+    return Expanded(
+      child: IconButton(
+        icon: Icon(
+          isSelected ? selectedIcon : icon,
+          color: isSelected ? PrimaryColors.shade600 : NeutralColors.shade300,
+        ),
+        onPressed: () => _onTap(index),
+      ),
     );
   }
 }
