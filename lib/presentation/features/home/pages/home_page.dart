@@ -4,60 +4,36 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:recipe_app/core/theme/app_colors.dart';
+import 'package:recipe_app/presentation/features/home/widgets/category_selector.dart';
 
-class HomePage extends StatefulWidget {
+class HomePage extends StatelessWidget {
   const HomePage({super.key});
-
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  final FocusNode _searchFocusNode = FocusNode();
-
-  @override
-  void dispose() {
-    _searchFocusNode.dispose();
-    super.dispose();
-  }
-
-  void _onScroll() {
-    if (_searchFocusNode.hasFocus) {
-      _searchFocusNode.unfocus();
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: NotificationListener<ScrollNotification>(
-          onNotification: (notification) {
-            if (notification is ScrollUpdateNotification) {
-              _onScroll();
-            }
-            return false;
-          },
-          child: CustomScrollView(
-            slivers: [
-              SliverAppBar(
-                title: _buildSearchBar(),
-                pinned: false,
-                floating: true,
-                snap: true,
-                elevation: 0,
-                surfaceTintColor: Colors.transparent,
-                titleSpacing: 0,
+        child: CustomScrollView(
+          slivers: [
+            SliverAppBar(
+              title: _buildSearchBar(),
+              pinned: false,
+              floating: true,
+              snap: true,
+              elevation: 0,
+              surfaceTintColor: Colors.transparent,
+              titleSpacing: 0,
+            ),
+            SliverToBoxAdapter(child: _buildLocalSection(context)),
+            SliverToBoxAdapter(child: SizedBox(height: 16)),
+            SliverToBoxAdapter(child: _buildCategorySection(context)),
+            SliverList(
+              delegate: SliverChildBuilderDelegate(
+                (context, index) => ListTile(title: Text('Item #$index')),
+                childCount: 50,
               ),
-              SliverToBoxAdapter(child: _buildLocalSection(context)),
-              SliverList(
-                delegate: SliverChildBuilderDelegate(
-                  (context, index) => ListTile(title: Text('Item #$index')),
-                  childCount: 50,
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
@@ -106,6 +82,125 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       ],
+    );
+  }
+
+  Column _buildCategorySection(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 6.0, horizontal: 16.0),
+          child: Row(
+            children: [
+              Text(
+                'Danh mục',
+                style: Theme.of(
+                  context,
+                ).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
+              ),
+              const Spacer(),
+              InkWell(
+                onTap: () {},
+                child: Text(
+                  'Xem tất cả',
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        SizedBox(height: 12),
+        CategorySelector(),
+        SizedBox(height: 12),
+        SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12),
+            child: Row(
+              children: List.generate(10, (index) {
+                return Padding(
+                  padding: const EdgeInsets.only(right: 16, top: 10),
+                  child: _buildCategoryRecipeCard(context),
+                );
+              }),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  SizedBox _buildCategoryRecipeCard(BuildContext context) {
+    return SizedBox(
+      width: 150,
+      child: Stack(
+        clipBehavior: Clip.none,
+        children: [
+          // Thẻ màu vàng
+          Container(
+            margin: const EdgeInsets.only(top: 40),
+            padding: const EdgeInsets.only(left: 16, right: 16, bottom: 12),
+            decoration: BoxDecoration(
+              color: MiscellaneousColors.tinted.withValues(alpha: 0.15),
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const SizedBox(height: 33),
+                Text(
+                  "Trứng chiên",
+                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                    fontWeight: FontWeight.bold,
+                    color: PrimaryColors.shade900,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 6),
+                Text(
+                  "Tạo bởi\nTrần Đình Trọng",
+                  style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                    fontWeight: FontWeight.bold,
+                    color: PrimaryColors.shade950,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 33),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "20 phút",
+                      style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                        color: PrimaryColors.shade950,
+                      ),
+                    ),
+                    Icon(
+                      Icons.sticky_note_2_outlined,
+                      size: 24,
+                      color: PrimaryColors.shade900,
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+
+          // Ảnh tròn
+          Positioned(
+            top: -10,
+            left: 0,
+            right: 0,
+            child: CircleAvatar(
+              radius: 40,
+              backgroundImage: AssetImage("assets/images/egg.jpg"),
+            ),
+          ),
+        ],
+      ),
     );
   }
 
@@ -244,7 +339,6 @@ class _HomePageState extends State<HomePage> {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0),
       child: CupertinoSearchTextField(
-        focusNode: _searchFocusNode,
         placeholder: "Tìm kiếm sản phẩm",
         onChanged: (value) {
           // TODO: search logic

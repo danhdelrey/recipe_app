@@ -41,3 +41,8 @@ class SecondaryColors {
   static const Color shade900 = Color(0xFF0043b3);
   static const Color shade950 = Color(0xFF002d73);
 }
+
+class MiscellaneousColors {
+  static const Color tinted = Color(0xFFCEA700);
+  
+}
