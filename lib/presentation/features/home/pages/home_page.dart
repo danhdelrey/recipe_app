@@ -29,12 +29,9 @@ class HomePage extends StatelessWidget {
             SliverToBoxAdapter(child: _buildCategorySection(context)),
             SliverToBoxAdapter(child: SizedBox(height: 16)),
             SliverToBoxAdapter(child: _buildRecentRecipeSection(context)),
-            SliverList(
-              delegate: SliverChildBuilderDelegate(
-                (context, index) => ListTile(title: Text('Item #$index')),
-                childCount: 50,
-              ),
-            ),
+            SliverToBoxAdapter(child: SizedBox(height: 16)),
+            SliverToBoxAdapter(child: _buildIngredientSection(context)),
+            SliverToBoxAdapter(child: SizedBox(height: 50)),
           ],
         ),
       ),
@@ -162,6 +159,37 @@ class HomePage extends StatelessWidget {
               }),
             ),
           ),
+        ),
+      ],
+    );
+  }
+
+  Column _buildIngredientSection(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 6.0, horizontal: 16.0),
+          child: Text(
+            'Nguyên liệu',
+            style: Theme.of(
+              context,
+            ).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
+          ),
+        ),
+        SizedBox(height: 12),
+        CategorySelector(
+          wrapContent: true,
+          categories: [
+            "Danh mục 1",
+            "Danh mục 2",
+            "Danh mục",
+            "Danh mục 3",
+            "Danh mục 1",
+            "Danh mục 2",
+            "Danh mục",
+            "Danh mục 3",
+          ],
         ),
       ],
     );
@@ -406,12 +434,12 @@ class HomePage extends StatelessWidget {
                 children: [
                   CircleAvatar(
                     radius: 9,
-                    backgroundImage: AssetImage('assets/images/avatar.png'),
+                    backgroundImage: AssetImage('assets/images/avt2.png'),
                     backgroundColor: NeutralColors.shade50,
                   ),
                   const SizedBox(width: 6),
                   Text(
-                    'Đinh Trọng Phúc',
+                    'Nguyễn Đình Trọng',
                     style: Theme.of(context).textTheme.labelSmall?.copyWith(
                       color: SecondaryColors.shade950,
                       fontWeight: FontWeight.bold,
