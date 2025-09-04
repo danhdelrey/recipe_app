@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:recipe_app/core/theme/app_colors.dart';
 import 'package:recipe_app/presentation/features/home/widgets/category_selector.dart';
@@ -16,7 +17,7 @@ class HomePage extends StatelessWidget {
         child: CustomScrollView(
           slivers: [
             SliverAppBar(
-              title: _buildSearchBar(),
+              title: _buildSearchBar(context),
               pinned: false,
               floating: true,
               snap: true,
@@ -456,15 +457,24 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  Padding _buildSearchBar() {
+  Padding _buildSearchBar(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0),
-      child: CupertinoSearchTextField(
-        placeholder: "Tìm kiếm sản phẩm",
-        onChanged: (value) {
-          // TODO: search logic
+      child: InkWell(
+        onTap: () {
+          context.push('/home/home_search');
         },
-        backgroundColor: Colors.white,
+        child: CupertinoSearchTextField(
+          enabled: false,
+          placeholder: "Tìm kiếm sản phẩm",
+          onChanged: (value) {
+            // TODO: search logic
+          },
+          backgroundColor: Colors.white,
+          style: Theme.of(
+            context,
+          ).textTheme.bodyLarge?.copyWith(color: NeutralColors.shade800),
+        ),
       ),
     );
   }

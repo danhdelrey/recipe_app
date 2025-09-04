@@ -18,6 +18,7 @@ class AppTheme {
     appBarTheme: const AppBarTheme(
       backgroundColor: NeutralColors.shade50,
       elevation: 0,
+      surfaceTintColor: Colors.transparent,
     ),
 
     textTheme: GoogleFonts.interTextTheme(ThemeData.light().textTheme),
