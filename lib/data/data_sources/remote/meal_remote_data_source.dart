@@ -6,11 +6,13 @@ import 'package:recipe_app/data/models/area_model.dart';
 import 'package:recipe_app/data/models/category_model.dart';
 import 'package:recipe_app/data/models/ingredient_model.dart';
 import 'package:recipe_app/data/models/meal_api_response.dart';
+import 'package:recipe_app/data/models/meal_model.dart';
 
 abstract class MealRemoteDataSource {
   Future<List<CategoryModel>> getCategories();
   Future<List<AreaModel>> getAreas();
   Future<List<IngredientModel>> getIngredients();
+  Future<List<MealModel>> searchMealsByName(String query);
 }
 
 @LazySingleton(as: MealRemoteDataSource)
@@ -57,5 +59,10 @@ class MealRemoteDataSourceImpl implements MealRemoteDataSource {
   @override
   Future<List<IngredientModel>> getIngredients() async {
     return _fetchData('list.php?i=list', IngredientModel.fromJson);
+  }
+
+  @override
+  Future<List<MealModel>> searchMealsByName(String query) async {
+    return _fetchData('search.php?s=$query', MealModel.fromJson);
   }
 }

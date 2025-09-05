@@ -6,6 +6,7 @@ import 'package:recipe_app/data/data_sources/remote/meal_remote_data_source.dart
 import 'package:recipe_app/domain/entities/area_entity.dart';
 import 'package:recipe_app/domain/entities/category_entity.dart';
 import 'package:recipe_app/domain/entities/ingredient_entity.dart';
+import 'package:recipe_app/domain/entities/meal_entity.dart';
 import 'package:recipe_app/domain/repositories/meal_repository.dart';
 
 @LazySingleton(as: MealRepository)
@@ -40,6 +41,22 @@ class MealRepositoryImpl implements MealRepository {
   Future<Either<Failure, List<IngredientEntity>>> getIngredients() async {
     try {
       final models = await remoteDataSource.getIngredients();
+      final entities = models.map((model) => model.toEntity()).toList();
+      return Right(entities);
+    } on ServerException {
+      return Left(ServerFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<MealEntity>>> searchMealsByName(
+    String query,
+  ) async {
+    try {
+      final models = await remoteDataSource.searchMealsByName(query);
+      if (models.isEmpty) {
+        return const Right([]);
+      }
       final entities = models.map((model) => model.toEntity()).toList();
       return Right(entities);
     } on ServerException {

@@ -19,6 +19,7 @@ import '../domain/repositories/meal_repository.dart' as _i279;
 import '../domain/usecases/get_areas_usecase.dart' as _i420;
 import '../domain/usecases/get_categories_usecase.dart' as _i350;
 import '../domain/usecases/get_ingredients_usecase.dart' as _i747;
+import '../domain/usecases/search_meals_by_name_usecase.dart' as _i42;
 import '../presentation/filter/bloc/filter_bloc.dart' as _i944;
 import 'register_module.dart' as _i291;
 
@@ -45,6 +46,9 @@ _i174.GetIt init(
   );
   gh.factory<_i747.GetIngredientsUseCase>(
     () => _i747.GetIngredientsUseCase(gh<_i279.MealRepository>()),
+  );
+  gh.factory<_i42.SearchMealsByNameUseCase>(
+    () => _i42.SearchMealsByNameUseCase(gh<_i279.MealRepository>()),
   );
   gh.factory<_i944.FilterBloc>(
     () => _i944.FilterBloc(
