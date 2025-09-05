@@ -23,7 +23,7 @@ class ProfilePage extends StatelessWidget {
           ),
         ],
         title: Text(
-          'Công thức',
+          'Trang cá nhân',
           style: Theme.of(context).textTheme.bodyLarge?.copyWith(
             color: PrimaryColors.shade700,
             fontWeight: FontWeight.bold,
