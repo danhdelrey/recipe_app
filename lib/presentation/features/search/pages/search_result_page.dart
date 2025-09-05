@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:recipe_app/core/theme/app_colors.dart';
 import 'package:recipe_app/domain/entities/meal_entity.dart';
+import 'package:recipe_app/presentation/features/favorites/favorite_status/widgets/favorite_heart_widget.dart';
 import 'package:recipe_app/presentation/features/search/bloc/search_bloc.dart';
 import 'package:recipe_app/presentation/filter/pages/filter_bottom_sheet.dart';
 
@@ -163,7 +164,7 @@ class SearchResultPage extends StatelessWidget {
                       shape: BoxShape.circle,
                       color: Colors.white.withValues(alpha: 0.75),
                     ),
-                    child: Icon(Ionicons.heart, color: Colors.red, size: 20),
+                    child: FavoriteHeartWidget(meal: meal),
                   ),
                 ),
               ],

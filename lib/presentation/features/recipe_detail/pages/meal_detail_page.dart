@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:recipe_app/core/theme/app_colors.dart';
 import 'package:recipe_app/domain/entities/meal_entity.dart';
+import 'package:recipe_app/presentation/features/favorites/favorite_status/widgets/favorite_heart_widget.dart';
 
 class MealDetailPage extends StatelessWidget {
   const MealDetailPage({super.key, required this.meal});
@@ -117,11 +118,7 @@ class MealDetailPage extends StatelessWidget {
                           ),
                         ),
                         SizedBox(width: 10),
-                        Icon(
-                          Ionicons.heart_outline,
-                          size: 24,
-                          color: NeutralColors.shade700,
-                        ),
+                        FavoriteHeartWidget(meal: meal),
                       ],
                     ),
                     SizedBox(height: 6),
