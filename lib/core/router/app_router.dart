@@ -4,6 +4,7 @@ import 'package:recipe_app/presentation/features/home/pages/home_page.dart';
 import 'package:recipe_app/presentation/features/home_search/pages/home_search_page.dart';
 import 'package:recipe_app/presentation/features/introduction/pages/introduction_page.dart';
 import 'package:recipe_app/presentation/features/profile/pages/profile_page.dart';
+import 'package:recipe_app/presentation/features/recipe_detail/pages/recipe_detail_page.dart';
 import 'package:recipe_app/presentation/features/saved/pages/saved_page.dart';
 import 'package:recipe_app/presentation/features/search/pages/search_page.dart';
 import 'package:recipe_app/presentation/shell/main_shell.dart';
@@ -68,9 +69,9 @@ final GoRouter router = GoRouter(
       builder: (context, state) => const IntroductionPage(),
     ),
 
-    // GoRoute(
-    //   path: '/recipe-detail/:id',
-    //   builder: (context, state) => RecipeDetailPage(id: state.pathParameters['id']!),
-    // ),
+    GoRoute(
+      path: '/recipe-detail',
+      builder: (context, state) => RecipeDetailPage(),
+    ),
   ],
 );
