@@ -5,6 +5,7 @@ import 'package:ionicons/ionicons.dart';
 import 'package:recipe_app/core/theme/app_colors.dart';
 import 'package:recipe_app/domain/entities/meal_entity.dart';
 import 'package:recipe_app/presentation/features/favorites/favorite_status/widgets/favorite_heart_widget.dart';
+import 'package:recipe_app/presentation/features/recipe_detail/widgets/instruction_section.dart';
 
 class MealDetailPage extends StatelessWidget {
   const MealDetailPage({super.key, required this.meal});
@@ -183,71 +184,7 @@ class MealDetailPage extends StatelessWidget {
                       thickness: 2,
                     ),
                     SizedBox(height: 24),
-                    Row(
-                      children: [
-                        SizedBox(width: 24),
-                        Expanded(
-                          child: FilledButton(
-                            onPressed: () {},
-                            style: FilledButton.styleFrom(
-                              backgroundColor: Theme.of(
-                                context,
-                              ).colorScheme.primary,
-                              padding: const EdgeInsets.symmetric(vertical: 12),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                            ),
-                            child: Text(
-                              "Nguyên liệu",
-                              style: Theme.of(context).textTheme.titleMedium
-                                  ?.copyWith(color: Colors.white),
-                            ),
-                          ),
-                        ),
-                        SizedBox(width: 24),
-
-                        Expanded(
-                          child: TextButton(
-                            onPressed: () {},
-                            style: TextButton.styleFrom(
-                              padding: const EdgeInsets.symmetric(vertical: 12),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                            ),
-                            child: Text(
-                              "Chế biến",
-                              style: Theme.of(context).textTheme.titleMedium
-                                  ?.copyWith(
-                                    color: Theme.of(
-                                      context,
-                                    ).colorScheme.primary,
-                                  ),
-                            ),
-                          ),
-                        ),
-                        SizedBox(width: 24),
-                      ],
-                    ),
-                    SizedBox(height: 24),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                      child: Text(
-                        meal.ingredients
-                            .map(
-                              (i) =>
-                                  i.name +
-                                  (i.measure.isNotEmpty
-                                      ? ' - ${i.measure}'
-                                      : ''),
-                            )
-                            .join('\n'),
-                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: NeutralColors.shade700,
-                        ),
-                      ),
-                    ),
+                    InstructionSection(meal: meal),
 
                     SizedBox(height: 24),
                     SizedBox(
