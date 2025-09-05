@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:recipe_app/core/theme/app_colors.dart';
 
 class SearchSuggestionsPage extends StatelessWidget {
@@ -17,6 +18,12 @@ class SearchSuggestionsPage extends StatelessWidget {
             autofocus: true,
             placeholder: "Tìm kiếm sản phẩm",
             onChanged: (value) {},
+            onSubmitted: (value) {
+              context.pushReplacement(
+                '/search-result',
+                extra: {'query': value},
+              );
+            },
             backgroundColor: NeutralColors.shade200,
             style: Theme.of(
               context,

@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:recipe_app/injection/injection_container.dart';
 import 'package:recipe_app/presentation/features/home/pages/home_page.dart';
+import 'package:recipe_app/presentation/features/search/bloc/search_bloc.dart';
+import 'package:recipe_app/presentation/features/search/pages/search_result_page.dart';
 import 'package:recipe_app/presentation/features/search/pages/search_suggestions_page.dart';
 import 'package:recipe_app/presentation/features/introduction/pages/introduction_page.dart';
 import 'package:recipe_app/presentation/features/profile/pages/profile_page.dart';
@@ -73,5 +77,21 @@ final GoRouter router = GoRouter(
       path: '/recipe-detail',
       builder: (context, state) => RecipeDetailPage(),
     ),
+
+    GoRoute(
+      path: '/search-result',
+      builder: (context, state) {
+        final args = state.extra as Map<String, dynamic>?;
+        final query = args?['query'] as String? ?? '';
+
+        return BlocProvider(
+          create: (context) => getIt<SearchBloc>()
+            ..add(
+              SearchEvent.querySubmitted(query),
+            ),
+          child: SearchResultPage(query: query),
+        );
+      },
+    )
   ],
 );
