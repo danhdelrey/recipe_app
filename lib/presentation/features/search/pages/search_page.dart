@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:recipe_app/core/theme/app_colors.dart';
-import 'package:recipe_app/presentation/features/search/widgets/filter_bottom_sheet.dart';
+import 'package:recipe_app/presentation/filter/pages/filter_bottom_sheet.dart';
 
 class SearchPage extends StatelessWidget {
   const SearchPage({super.key});
