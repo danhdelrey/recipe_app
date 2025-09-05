@@ -20,6 +20,7 @@ import '../domain/usecases/get_areas_usecase.dart' as _i420;
 import '../domain/usecases/get_categories_usecase.dart' as _i350;
 import '../domain/usecases/get_ingredients_usecase.dart' as _i747;
 import '../domain/usecases/search_meals_by_name_usecase.dart' as _i42;
+import '../presentation/features/search/bloc/search_bloc.dart' as _i1070;
 import '../presentation/filter/bloc/filter_bloc.dart' as _i944;
 import 'register_module.dart' as _i291;
 
@@ -56,6 +57,9 @@ _i174.GetIt init(
       gh<_i420.GetAreasUseCase>(),
       gh<_i747.GetIngredientsUseCase>(),
     ),
+  );
+  gh.factory<_i1070.SearchBloc>(
+    () => _i1070.SearchBloc(gh<_i42.SearchMealsByNameUseCase>()),
   );
   return getIt;
 }
