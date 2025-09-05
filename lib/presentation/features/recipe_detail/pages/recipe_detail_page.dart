@@ -15,7 +15,7 @@ class RecipeDetailPage extends StatelessWidget {
           SliverAppBar(
             automaticallyImplyLeading: false,
             titleSpacing: 0,
-            expandedHeight: 350,
+            expandedHeight: 250,
             pinned: true,
             title: InkWell(
               onTap: () {

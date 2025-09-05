@@ -14,28 +14,26 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: CustomScrollView(
-          slivers: [
-            SliverAppBar(
-              title: _buildSearchBar(context),
-              pinned: false,
-              floating: true,
-              snap: true,
-              elevation: 0,
-              surfaceTintColor: Colors.transparent,
-              titleSpacing: 0,
-            ),
-            SliverToBoxAdapter(child: _buildLocalSection(context)),
-            SliverToBoxAdapter(child: SizedBox(height: 16)),
-            SliverToBoxAdapter(child: _buildCategorySection(context)),
-            SliverToBoxAdapter(child: SizedBox(height: 16)),
-            SliverToBoxAdapter(child: _buildRecentRecipeSection(context)),
-            SliverToBoxAdapter(child: SizedBox(height: 16)),
-            SliverToBoxAdapter(child: _buildIngredientSection(context)),
-            SliverToBoxAdapter(child: SizedBox(height: 50)),
-          ],
-        ),
+      body: CustomScrollView(
+        slivers: [
+          SliverAppBar(
+            title: _buildSearchBar(context),
+            pinned: false,
+            floating: true,
+            snap: true,
+            elevation: 0,
+            surfaceTintColor: Colors.transparent,
+            titleSpacing: 0,
+          ),
+          SliverToBoxAdapter(child: _buildLocalSection(context)),
+          SliverToBoxAdapter(child: SizedBox(height: 16)),
+          SliverToBoxAdapter(child: _buildCategorySection(context)),
+          SliverToBoxAdapter(child: SizedBox(height: 16)),
+          SliverToBoxAdapter(child: _buildRecentRecipeSection(context)),
+          SliverToBoxAdapter(child: SizedBox(height: 16)),
+          SliverToBoxAdapter(child: _buildIngredientSection(context)),
+          SliverToBoxAdapter(child: SizedBox(height: 200)),
+        ],
       ),
     );
   }

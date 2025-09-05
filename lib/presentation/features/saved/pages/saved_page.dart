@@ -97,7 +97,7 @@ class SavedPage extends StatelessWidget {
           LocalRecipeCard(width: double.infinity, imageHeight: 140),
           SizedBox(height: 10),
           LocalRecipeCard(width: double.infinity, imageHeight: 140),
-          SizedBox(height: 50),
+          SizedBox(height: 200),
         ],
       ),
     );
