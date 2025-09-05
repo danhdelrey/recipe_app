@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:recipe_app/core/theme/app_colors.dart';
 import 'package:recipe_app/presentation/filter/pages/filter_bottom_sheet.dart';
@@ -18,14 +19,20 @@ class SearchPage extends StatelessWidget {
           child: Row(
             children: [
               Expanded(
-                child: CupertinoSearchTextField(
-                  placeholder: "Tìm kiếm sản phẩm",
-                  onChanged: (value) {},
-                  backgroundColor: NeutralColors.shade200,
-                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                    color: NeutralColors.shade800,
+                child: InkWell(
+                  onTap: () {
+                    context.push('/search/search_suggestions');
+                  },
+                  child: CupertinoSearchTextField(
+                    enabled: false,
+                    placeholder: "Tìm kiếm sản phẩm",
+                    onChanged: (value) {},
+                    backgroundColor: NeutralColors.shade200,
+                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                      color: NeutralColors.shade800,
+                    ),
+                    suffixMode: OverlayVisibilityMode.never,
                   ),
-                  suffixMode: OverlayVisibilityMode.never,
                 ),
               ),
               SizedBox(width: 16),

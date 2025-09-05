@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:recipe_app/presentation/features/home/pages/home_page.dart';
-import 'package:recipe_app/presentation/features/home_search/pages/home_search_page.dart';
+import 'package:recipe_app/presentation/features/search/pages/search_suggestions_page.dart';
 import 'package:recipe_app/presentation/features/introduction/pages/introduction_page.dart';
 import 'package:recipe_app/presentation/features/profile/pages/profile_page.dart';
 import 'package:recipe_app/presentation/features/recipe_detail/pages/recipe_detail_page.dart';
@@ -25,12 +25,6 @@ final GoRouter router = GoRouter(
             GoRoute(
               path: '/home',
               builder: (context, state) => const HomePage(),
-              routes: [
-                GoRoute(
-                  path: 'home_search',
-                  builder: (context, state) => const HomeSearchPage(),
-                ),
-              ],
             ),
           ],
         ),
@@ -40,6 +34,12 @@ final GoRouter router = GoRouter(
             GoRoute(
               path: '/search',
               builder: (context, state) => const SearchPage(),
+              routes: [
+                GoRoute(
+                  path: 'search_suggestions',
+                  builder: (context, state) => const SearchSuggestionsPage(),
+                ),
+              ],
             ),
           ],
         ),

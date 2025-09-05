@@ -330,7 +330,7 @@ class HomePage extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0),
       child: InkWell(
         onTap: () {
-          context.push('/home/home_search');
+          context.push('/search/search_suggestions');
         },
         child: CupertinoSearchTextField(
           enabled: false,

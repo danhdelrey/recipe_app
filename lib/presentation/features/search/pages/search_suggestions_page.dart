@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:recipe_app/core/theme/app_colors.dart';
 
-class HomeSearchPage extends StatelessWidget {
-  const HomeSearchPage({super.key});
+class SearchSuggestionsPage extends StatelessWidget {
+  const SearchSuggestionsPage({super.key});
 
   @override
   Widget build(BuildContext context) {

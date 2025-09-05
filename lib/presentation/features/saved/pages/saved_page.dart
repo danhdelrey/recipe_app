@@ -79,7 +79,7 @@ class SavedPage extends StatelessWidget {
                       child: Center(
                         child: Text(
                           "Công thức",
-                          style: Theme.of(context).textTheme.titleMedium
+                          style: Theme.of(context).textTheme.bodyMedium
                               ?.copyWith(
                                 color: Theme.of(context).colorScheme.primary,
                               ),
