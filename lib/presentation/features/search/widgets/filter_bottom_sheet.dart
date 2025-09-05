@@ -40,7 +40,9 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
               ),
             ),
             InkWell(
-              onTap: () {},
+              onTap: () {
+                Navigator.pop(context);
+              },
               borderRadius: BorderRadius.circular(1000),
               child: Icon(Icons.close, size: 30),
             ),

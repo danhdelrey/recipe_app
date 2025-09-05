@@ -7,10 +7,14 @@ import 'package:recipe_app/core/theme/app_colors.dart';
 class LocalRecipeCard extends StatelessWidget {
   const LocalRecipeCard({
     super.key,
-    required this.context,
+    this.imageAsset = 'assets/images/image1.png',
+    this.width = 250,
+    this.imageHeight,
   });
 
-  final BuildContext context;
+  final String imageAsset;
+  final double width;
+  final double? imageHeight;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +28,7 @@ class LocalRecipeCard extends StatelessWidget {
           color: Colors.white,
           borderRadius: BorderRadius.circular(8.0),
         ),
-        width: 250,
+        width: width,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -33,8 +37,10 @@ class LocalRecipeCard extends StatelessWidget {
                 ClipRRect(
                   borderRadius: BorderRadius.circular(8.0),
                   child: Image.asset(
-                    'assets/images/image1.png',
+                    imageAsset,
                     fit: BoxFit.cover,
+                    height: imageHeight,
+                    width: width,
                   ),
                 ),
 

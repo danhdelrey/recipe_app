@@ -77,7 +77,7 @@ class HomePage extends StatelessWidget {
             itemCount: 10,
             padding: const EdgeInsets.symmetric(horizontal: 16),
             itemBuilder: (context, index) {
-              return LocalRecipeCard(context: context);
+              return LocalRecipeCard();
             },
             separatorBuilder: (context, index) => const SizedBox(width: 16),
           ),
