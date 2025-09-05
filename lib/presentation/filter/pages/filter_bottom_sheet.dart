@@ -24,32 +24,22 @@ class FilterBottomSheet extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Top drag handle and close button
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Expanded(
-                    child: Align(
-                      alignment: Alignment.center,
-                      child: Container(
-                        width: 60,
-                        height: 4,
-                        margin: const EdgeInsets.only(top: 8),
-                        decoration: BoxDecoration(
-                          color: NeutralColors.shade400,
-                          borderRadius: BorderRadius.circular(2),
-                        ),
-                      ),
-                    ),
+              Center(
+                child: Container(
+                  width: 60,
+                  height: 3,
+                  decoration: BoxDecoration(
+                    color: NeutralColors.shade400,
+                    borderRadius: BorderRadius.circular(2),
                   ),
-                  InkWell(
-                    onTap: () => Navigator.pop(context),
-                    borderRadius: BorderRadius.circular(1000),
-                    child: const Icon(Icons.close, size: 24),
-                  ),
-                ],
+                ),
               ),
               const SizedBox(height: 16),
+              InkWell(
+                onTap: () => Navigator.pop(context),
+                borderRadius: BorderRadius.circular(1000),
+                child: const Icon(Icons.close, size: 24),
+              ),
 
               // Header
               Row(
@@ -61,9 +51,21 @@ class FilterBottomSheet extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  TextButton(
+                  FilledButton(
                     onPressed: () => context.read<FilterBloc>().add(
                       const FilterEvent.resetFilters(),
+                    ),
+                    style: FilledButton.styleFrom(
+                      backgroundColor: MiscellaneousColors.tinted.withValues(
+                        alpha: 0.15,
+                      ),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 20,
+                        vertical: 14,
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
                     ),
                     child: Text(
                       "Đặt lại",
