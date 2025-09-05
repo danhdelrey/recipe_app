@@ -1,16 +1,30 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:ionicons/ionicons.dart';
 import 'package:recipe_app/core/theme/app_colors.dart';
 import 'package:recipe_app/domain/entities/meal_entity.dart';
 import 'package:recipe_app/presentation/features/favorites/favorite_status/widgets/favorite_heart_widget.dart';
 import 'package:recipe_app/presentation/features/recipe_detail/widgets/instruction_section.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class MealDetailPage extends StatelessWidget {
   const MealDetailPage({super.key, required this.meal});
 
   final MealEntity meal;
+
+  Future<void> _launchYoutube() async {
+    final Uri url = Uri.parse(meal.youtubeUrl ?? '');
+
+    final bool launched = await launchUrl(
+      url,
+      mode: LaunchMode.externalApplication,
+    );
+
+    if (!launched) {
+      throw Exception("Không mở được $url");
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -190,7 +204,7 @@ class MealDetailPage extends StatelessWidget {
                     SizedBox(
                       width: double.infinity,
                       child: FilledButton.icon(
-                        onPressed: () {},
+                        onPressed: _launchYoutube,
                         style: FilledButton.styleFrom(
                           backgroundColor: MiscellaneousColors.tinted
                               .withValues(alpha: 0.15),
