@@ -67,7 +67,7 @@ class SavedPage extends StatelessWidget {
                 Expanded(
                   child: InkWell(
                     onTap: () {},
-                    borderRadius: BorderRadius.circular(10),
+                    borderRadius: BorderRadius.circular(1000),
                     child: Container(
                       padding: const EdgeInsets.symmetric(vertical: 4),
                       decoration: BoxDecoration(
