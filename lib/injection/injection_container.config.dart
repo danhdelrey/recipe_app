@@ -16,6 +16,10 @@ import 'package:injectable/injectable.dart' as _i526;
 import '../data/data_sources/remote/meal_remote_data_source.dart' as _i1036;
 import '../data/repositories/meal_repository_impl.dart' as _i645;
 import '../domain/repositories/meal_repository.dart' as _i279;
+import '../domain/usecases/get_areas_usecase.dart' as _i420;
+import '../domain/usecases/get_categories_usecase.dart' as _i350;
+import '../domain/usecases/get_ingredients_usecase.dart' as _i747;
+import '../presentation/filter/bloc/filter_bloc.dart' as _i944;
 import 'register_module.dart' as _i291;
 
 // initializes the registration of main-scope dependencies inside of GetIt
@@ -32,6 +36,22 @@ _i174.GetIt init(
   );
   gh.lazySingleton<_i279.MealRepository>(
     () => _i645.MealRepositoryImpl(gh<_i1036.MealRemoteDataSource>()),
+  );
+  gh.factory<_i420.GetAreasUseCase>(
+    () => _i420.GetAreasUseCase(gh<_i279.MealRepository>()),
+  );
+  gh.factory<_i350.GetCategoriesUseCase>(
+    () => _i350.GetCategoriesUseCase(gh<_i279.MealRepository>()),
+  );
+  gh.factory<_i747.GetIngredientsUseCase>(
+    () => _i747.GetIngredientsUseCase(gh<_i279.MealRepository>()),
+  );
+  gh.factory<_i944.FilterBloc>(
+    () => _i944.FilterBloc(
+      gh<_i350.GetCategoriesUseCase>(),
+      gh<_i420.GetAreasUseCase>(),
+      gh<_i747.GetIngredientsUseCase>(),
+    ),
   );
   return getIt;
 }
