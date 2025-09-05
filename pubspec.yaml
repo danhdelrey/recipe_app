@@ -50,6 +50,9 @@ dependencies:
   logger: ^2.6.1
   dartz: ^0.10.1
   cached_network_image: ^3.4.1
+  hive_ce_generator: ^1.9.3
+  hive_ce: ^2.11.4
+  hive_ce_flutter: ^2.3.2
 
 dev_dependencies:
   flutter_test:
