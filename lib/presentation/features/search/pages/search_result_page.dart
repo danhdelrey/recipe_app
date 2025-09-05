@@ -121,94 +121,99 @@ class SearchResultPage extends StatelessWidget {
   }
 
   Widget _buildSearchResultItem(MealEntity meal, BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(12.0),
-      ),
-      child: Column(
-        children: [
-          Stack(
-            children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(12.0),
-                child: CachedNetworkImage(
-                  imageUrl: meal.thumbnail,
-                  height: 150,
-                  fit: BoxFit.cover,
-                  placeholder: (context, url) => Container(
-                    height: 150,
-                    color: NeutralColors.shade200,
-                    child: Center(child: CircularProgressIndicator()),
-                  ),
-                  errorWidget: (context, url, error) => Container(
-                    height: 150,
-                    color: NeutralColors.shade200,
-                    child: Icon(Icons.error, color: NeutralColors.shade400),
-                  ),
-                ),
-              ),
-              Positioned(
-                right: 8,
-                top: 8,
-                child: Container(
-                  width: 32,
-                  height: 32,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Colors.white.withValues(alpha: 0.75),
-                  ),
-                  child: Icon(Ionicons.heart, color: Colors.red, size: 20),
-                ),
-              ),
-            ],
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 12, right: 12, top: 6),
-            child: Column(
+    return InkWell(
+      onTap: () {
+        context.push('/meal-detail', extra: {'meal': meal});
+      },
+      borderRadius: BorderRadius.circular(12.0),
+      child: Ink(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(12.0),
+        ),
+        child: Column(
+          children: [
+            Stack(
               children: [
-                Text(
-                  meal.name,
-                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                    fontWeight: FontWeight.bold,
-                    color: NeutralColors.shade950,
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(12.0),
+                  child: CachedNetworkImage(
+                    imageUrl: meal.thumbnail,
+                    height: 150,
+                    fit: BoxFit.cover,
+                    placeholder: (context, url) => Container(
+                      height: 150,
+                      color: NeutralColors.shade200,
+                      child: Center(child: CircularProgressIndicator()),
+                    ),
+                    errorWidget: (context, url, error) => Container(
+                      height: 150,
+                      color: NeutralColors.shade200,
+                      child: Icon(Icons.error, color: NeutralColors.shade400),
+                    ),
                   ),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
                 ),
-                Row(
-                  children: [
-                    Expanded(
-                      child: Text(
-                        'By Little Pony',
-                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color: NeutralColors.shade400,
-                        ),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                      ),
+                Positioned(
+                  right: 8,
+                  top: 8,
+                  child: Container(
+                    width: 32,
+                    height: 32,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.white.withValues(alpha: 0.75),
                     ),
-                    Row(
-                      children: [
-                        Icon(
-                          Ionicons.time_outline,
-                          color: Theme.of(context).colorScheme.primary,
-                          size: 16,
-                        ),
-                        SizedBox(width: 4),
-                        Text(
-                          '20m',
-                          style: Theme.of(context).textTheme.bodySmall
-                              ?.copyWith(color: NeutralColors.shade700),
-                        ),
-                      ],
-                    ),
-                  ],
+                    child: Icon(Ionicons.heart, color: Colors.red, size: 20),
+                  ),
                 ),
               ],
             ),
-          ),
-        ],
+            Padding(
+              padding: const EdgeInsets.only(left: 12, right: 12, top: 6),
+              child: Column(
+                children: [
+                  Text(
+                    meal.name,
+                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                      fontWeight: FontWeight.bold,
+                      color: NeutralColors.shade950,
+                    ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          'By Little Pony',
+                          style: Theme.of(context).textTheme.bodySmall
+                              ?.copyWith(color: NeutralColors.shade400),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                      Row(
+                        children: [
+                          Icon(
+                            Ionicons.time_outline,
+                            color: Theme.of(context).colorScheme.primary,
+                            size: 16,
+                          ),
+                          SizedBox(width: 4),
+                          Text(
+                            '20m',
+                            style: Theme.of(context).textTheme.bodySmall
+                                ?.copyWith(color: NeutralColors.shade700),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

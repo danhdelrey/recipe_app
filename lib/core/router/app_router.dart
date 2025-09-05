@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:recipe_app/domain/entities/meal_entity.dart';
 import 'package:recipe_app/injection/injection_container.dart';
 import 'package:recipe_app/presentation/features/home/pages/home_page.dart';
+import 'package:recipe_app/presentation/features/recipe_detail/pages/meal_detail_page.dart';
 import 'package:recipe_app/presentation/features/search/bloc/search_bloc.dart';
 import 'package:recipe_app/presentation/features/search/pages/search_result_page.dart';
 import 'package:recipe_app/presentation/features/search/pages/search_suggestions_page.dart';
@@ -76,6 +78,15 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: '/recipe-detail',
       builder: (context, state) => RecipeDetailPage(),
+    ),
+    GoRoute(
+      path: '/meal-detail',
+      builder: (context, state) {
+        final args = state.extra as Map<String, dynamic>?;
+        final meal = args!['meal'] as MealEntity;
+
+        return MealDetailPage(meal: meal);
+      },
     ),
 
     GoRoute(
