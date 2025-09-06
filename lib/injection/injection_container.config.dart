@@ -24,6 +24,8 @@ import '../domain/usecases/favorites/is_favorite_usecase.dart' as _i49;
 import '../domain/usecases/favorites/remove_favorite_meal_usecase.dart'
     as _i854;
 import '../domain/usecases/favorites/save_favorite_meal_usecase.dart' as _i146;
+import '../domain/usecases/favorites/watch_favorite_meals_usecase.dart'
+    as _i640;
 import '../domain/usecases/get_areas_usecase.dart' as _i420;
 import '../domain/usecases/get_categories_usecase.dart' as _i350;
 import '../domain/usecases/get_ingredients_usecase.dart' as _i747;
@@ -69,8 +71,11 @@ _i174.GetIt init(
   gh.factory<_i146.SaveFavoriteMealUseCase>(
     () => _i146.SaveFavoriteMealUseCase(gh<_i629.FavoriteRepository>()),
   );
+  gh.factory<_i640.WatchFavoriteMealsUseCase>(
+    () => _i640.WatchFavoriteMealsUseCase(gh<_i629.FavoriteRepository>()),
+  );
   gh.factory<_i206.FavoriteListBloc>(
-    () => _i206.FavoriteListBloc(gh<_i644.GetFavoriteMealsUseCase>()),
+    () => _i206.FavoriteListBloc(gh<_i640.WatchFavoriteMealsUseCase>()),
   );
   gh.factory<_i420.GetAreasUseCase>(
     () => _i420.GetAreasUseCase(gh<_i279.MealRepository>()),

@@ -14,7 +14,7 @@ class ProfilePage extends StatelessWidget {
     return BlocProvider(
       create: (context) =>
           getIt<FavoriteListBloc>()
-            ..add(const FavoriteListEvent.fetchFavorites()),
+            ..add(const FavoriteListEvent.subscriptionRequested()),
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.white,

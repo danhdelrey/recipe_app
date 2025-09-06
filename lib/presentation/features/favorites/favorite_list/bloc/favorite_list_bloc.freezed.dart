@@ -55,11 +55,11 @@ extension FavoriteListEventPatterns on FavoriteListEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _FetchFavorites value)?  fetchFavorites,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _SubscriptionRequested value)?  subscriptionRequested,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
-case _FetchFavorites() when fetchFavorites != null:
-return fetchFavorites(_that);case _:
+case _SubscriptionRequested() when subscriptionRequested != null:
+return subscriptionRequested(_that);case _:
   return orElse();
 
 }
@@ -77,11 +77,11 @@ return fetchFavorites(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _FetchFavorites value)  fetchFavorites,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _SubscriptionRequested value)  subscriptionRequested,}){
 final _that = this;
 switch (_that) {
-case _FetchFavorites():
-return fetchFavorites(_that);case _:
+case _SubscriptionRequested():
+return subscriptionRequested(_that);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -98,11 +98,11 @@ return fetchFavorites(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _FetchFavorites value)?  fetchFavorites,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _SubscriptionRequested value)?  subscriptionRequested,}){
 final _that = this;
 switch (_that) {
-case _FetchFavorites() when fetchFavorites != null:
-return fetchFavorites(_that);case _:
+case _SubscriptionRequested() when subscriptionRequested != null:
+return subscriptionRequested(_that);case _:
   return null;
 
 }
@@ -119,10 +119,10 @@ return fetchFavorites(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  fetchFavorites,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  subscriptionRequested,required TResult orElse(),}) {final _that = this;
 switch (_that) {
-case _FetchFavorites() when fetchFavorites != null:
-return fetchFavorites();case _:
+case _SubscriptionRequested() when subscriptionRequested != null:
+return subscriptionRequested();case _:
   return orElse();
 
 }
@@ -140,10 +140,10 @@ return fetchFavorites();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  fetchFavorites,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  subscriptionRequested,}) {final _that = this;
 switch (_that) {
-case _FetchFavorites():
-return fetchFavorites();case _:
+case _SubscriptionRequested():
+return subscriptionRequested();case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -160,10 +160,10 @@ return fetchFavorites();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  fetchFavorites,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  subscriptionRequested,}) {final _that = this;
 switch (_that) {
-case _FetchFavorites() when fetchFavorites != null:
-return fetchFavorites();case _:
+case _SubscriptionRequested() when subscriptionRequested != null:
+return subscriptionRequested();case _:
   return null;
 
 }
@@ -174,8 +174,8 @@ return fetchFavorites();case _:
 /// @nodoc
 
 
-class _FetchFavorites implements FavoriteListEvent {
-  const _FetchFavorites();
+class _SubscriptionRequested implements FavoriteListEvent {
+  const _SubscriptionRequested();
   
 
 
@@ -185,7 +185,7 @@ class _FetchFavorites implements FavoriteListEvent {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _FetchFavorites);
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SubscriptionRequested);
 }
 
 
@@ -194,7 +194,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'FavoriteListEvent.fetchFavorites()';
+  return 'FavoriteListEvent.subscriptionRequested()';
 }
 
 

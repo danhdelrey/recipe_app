@@ -51,4 +51,14 @@ class FavoriteRepositoryImpl implements FavoriteRepository {
       return Left(CacheFailure());
     }
   }
+
+   @override
+  Future<Either<Failure, Stream<List<MealEntity>>>> watchFavoriteMeals() async {
+    try {
+      final stream = localDataSource.watchSavedMeals();
+      return Right(stream);
+    } on HiveError {
+      return Left(CacheFailure());
+    }
+  }
 }

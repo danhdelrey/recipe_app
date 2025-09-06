@@ -14,4 +14,6 @@ abstract class FavoriteRepository {
 
   /// Lấy tất cả các món ăn đã yêu thích
   Future<Either<Failure, List<MealEntity>>> getFavoriteMeals();
+
+  Future<Either<Failure, Stream<List<MealEntity>>>> watchFavoriteMeals();
 }

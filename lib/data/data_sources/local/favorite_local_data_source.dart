@@ -8,6 +8,7 @@ abstract class FavoriteLocalDataSource {
   Future<void> removeMeal(String mealId);
   Future<bool> isMealFavorite(String mealId);
   Future<List<MealEntity>> getSavedMeals();
+  Stream<List<MealEntity>> watchSavedMeals();
 }
 
 @LazySingleton(as: FavoriteLocalDataSource)
@@ -42,5 +43,14 @@ class FavoriteLocalDataSourceImpl implements FavoriteLocalDataSource {
   Future<List<MealEntity>> getSavedMeals() async {
     final box = await _getBox();
     return box.values.map((hiveModel) => hiveModel.toEntity()).toList();
+  }
+
+  @override
+  Stream<List<MealEntity>> watchSavedMeals() async* {
+    final box = await _getBox();
+    yield box.values.map((hiveModel) => hiveModel.toEntity()).toList();
+    yield* box.watch().map((event) {
+      return box.values.map((hiveModel) => hiveModel.toEntity()).toList();
+    });
   }
 }

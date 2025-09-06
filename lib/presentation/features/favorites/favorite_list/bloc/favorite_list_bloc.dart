@@ -3,7 +3,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:recipe_app/core/utils/logger.dart';
 import 'package:recipe_app/domain/entities/meal_entity.dart';
-import 'package:recipe_app/domain/usecases/favorites/get_favorite_meals_usecase.dart';
+import 'package:recipe_app/domain/usecases/favorites/watch_favorite_meals_usecase.dart';
 
 part 'favorite_list_event.dart';
 part 'favorite_list_state.dart';
@@ -11,24 +11,25 @@ part 'favorite_list_bloc.freezed.dart';
 
 @injectable
 class FavoriteListBloc extends Bloc<FavoriteListEvent, FavoriteListState> {
-  final GetFavoriteMealsUseCase _getFavoriteMeals;
+  final WatchFavoriteMealsUseCase _watchFavoriteMeals;
 
-  FavoriteListBloc(this._getFavoriteMeals) : super(const FavoriteListState()) {
-    on<_FetchFavorites>(_onFetchFavorites);
+  FavoriteListBloc(this._watchFavoriteMeals)
+    : super(const FavoriteListState()) {
+    on<_SubscriptionRequested>(_onSubscriptionRequested);
   }
 
-  Future<void> _onFetchFavorites(
-    _FetchFavorites event,
+  Future<void> _onSubscriptionRequested(
+    _SubscriptionRequested event,
     Emitter<FavoriteListState> emit,
   ) async {
-    log.i('Fetching favorite meals list...');
+    log.i('Subscription to favorite meals requested...');
     emit(state.copyWith(status: FavoriteListStatus.loading));
 
-    final result = await _getFavoriteMeals();
+    final result = await _watchFavoriteMeals();
 
-    result.fold(
-      (failure) {
-        log.e('Failed to fetch favorite meals.');
+    await result.fold(
+      (failure) async {
+        log.e('Failed to subscribe to favorite meals stream.');
         emit(
           state.copyWith(
             status: FavoriteListStatus.error,
@@ -36,14 +37,30 @@ class FavoriteListBloc extends Bloc<FavoriteListEvent, FavoriteListState> {
           ),
         );
       },
-      (meals) {
-        if (meals.isEmpty) {
-          log.w('Favorite meals list is empty.');
-          emit(state.copyWith(status: FavoriteListStatus.empty, meals: []));
-        } else {
-          log.d('Successfully loaded ${meals.length} favorite meals.');
-          emit(state.copyWith(status: FavoriteListStatus.loaded, meals: meals));
-        }
+      (stream) async {
+        log.d('Successfully subscribed to favorite meals stream.');
+        await emit.forEach<List<MealEntity>>(
+          stream,
+          onData: (meals) {
+            if (meals.isEmpty) {
+              return state.copyWith(
+                status: FavoriteListStatus.empty,
+                meals: [],
+              );
+            } else {
+              return state.copyWith(
+                status: FavoriteListStatus.loaded,
+                meals: meals,
+              );
+            }
+          },
+          onError: (_, __) {
+            return state.copyWith(
+              status: FavoriteListStatus.error,
+              errorMessage: 'An error occurred in the stream.',
+            );
+          },
+        );
       },
     );
   }
